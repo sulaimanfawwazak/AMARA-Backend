@@ -1,7 +1,8 @@
 const express = require("express");
 const cors = require("cors");
 const multer = require("multer");
-const { getDocument } = require("pdfjs-dist/legacy/build/pdf.js");
+// const { getDocument } = require("pdfjs-dist/legacy/build/pdf.js");
+const pdf = require('pdf-parse');
 const {
   parseJenisUjian,
   parseNamaLengkap,
@@ -68,27 +69,30 @@ app.post("/upload", upload.single("file"), async (req, res) => {
     const pdfBuffer = req.file.buffer;
 
     // Convert Buffer to Uint8Array
-    const uint8Array = new Uint8Array(pdfBuffer);
+    // const uint8Array = new Uint8Array(pdfBuffer);
+    const data = await pdf(pdfBuffer);
 
     // Load PDF
-    const loadingTask = getDocument({ data: uint8Array });
-    const pdfDocument = await loadingTask.promise;
+    // const loadingTask = getDocument({ data: uint8Array });
+    // const pdfDocument = await loadingTask.promise;
 
-    if (pdfDocument.numPages === 0) {
-      return res.status(400).json({ error: "PDF contains no page." });
-    }
+    // if (pdfDocument.numPages === 0) {
+      // return res.status(400).json({ error: "PDF contains no page." });
+    // }
 
     // Get first page
-    const page = await pdfDocument.getPage(1);
-    const textContent = await page.getTextContent();
+    // const page = await pdfDocument.getPage(1);
+    // const textContent = await page.getTextContent();
 
     // Extract text and replace new lines with spaces
-    const texts = textContent.items
-      .map(item => item.str)
-      .join(' ')
-      .replace(/\s{2,}/g, ' ');
-      // .replace(/\s{2}/g, ' ');
-      // .replace(/\n/g, ' ');
+    // const texts = textContent.items
+    //   .map(item => item.str)
+    //   .join(' ')
+    //   .replace(/\s{2,}/g, ' ');
+    //   // .replace(/\s{2}/g, ' ');
+    //   // .replace(/\n/g, ' ');
+
+    const texts = data.text.replace(/\s{2,}/g, ' ')
 
     console.log(texts);
 
