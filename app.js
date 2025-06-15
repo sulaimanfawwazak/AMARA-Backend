@@ -23,8 +23,12 @@ const app = express();
 app.use(cors({
   origin: [
     'https://ugmexam2gcal.vercel.app',
+    'http://localhost:3000',
     'http://localhost:5173'  // For local dev
-  ]
+  ],
+  methods: ["GET", "POST"],
+  allowedHeaders: ["Content-Type"],
+  credentials: true
 }))
 
 // Configure multer for file uploads (memory storage)
@@ -41,6 +45,11 @@ const upload = multer({
       cb(new Error("File must be a PDF"), false);
     }
   }
+});
+
+// Health check endpoint
+app.get("/", (req, res) => {
+  res.json({ status: "healthy" });
 });
 
 // Health check endpoint
