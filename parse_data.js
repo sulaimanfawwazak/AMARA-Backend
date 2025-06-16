@@ -66,7 +66,8 @@ function parseRows(texts) {
 }
 
 function parseMataKuliah(texts) {
-  const patternMataKuliah = /\d{1,2}\s*[A-Z]{1,5}\s*\d{4,7}\s*[A-Z]?\s*\d{0,3}\s*(.*?)\s*Kelas\s*:/;
+  // const patternMataKuliah = /\d{1,2}\s*[A-Z]{1,5}\s*\d{4,7}\s*[A-Z]?\s*\d{0,3}\s*(.*?)\s*Kelas\s*:/;
+  const patternMataKuliah = /\d{1,2}\s*[A-Z]{1,5}\s*\d{3,7}\s{0,1}\s*\d{0,7}\s*(.*?)\s*Kelas\s*:/;
 
   try {
     const match = texts.match(patternMataKuliah);
@@ -102,7 +103,8 @@ function parseJam(texts) {
 }
 
 function parseRuangan(texts) {
-  const patternRuangan = /\d{2}:\d{2}-\d{2}:\d{2}\s+(.*?)\s(?=\d+(?=\s|$))/;
+  // const patternRuangan = /\d{2}:\d{2}-\d{2}:\d{2}\s+(.*?)\s(?=\d+(?=\s|$))/;
+  const patternRuangan = /\d{2}:\d{2}-\d{2}:\d{2}\s*(.*?)(?=\d{1,2}(?=\s|$))/;
 
   try {
     const match = texts.match(patternRuangan);
@@ -114,7 +116,8 @@ function parseRuangan(texts) {
 }
 
 function parseNoKursi(texts) {
-  const patternNoKursi = /\d{2}:\d{2}-\d{2}:\d{2}\s+.*?\s(?=\d+(?=\s|$))\s*(\d{1,2})/;
+  // const patternNoKursi = /\d{2}:\d{2}-\d{2}:\d{2}\s+.*?\s(?=\d+(?=\s|$))\s*(\d{1,2})/;
+  const patternNoKursi = /\d{2}:\d{2}-\d{2}:\d{2}\s*.*?(?=\d{1,2}(?=\s|$))(\d{1,2})\s*/;
 
   try {
     const match = texts.match(patternNoKursi);
