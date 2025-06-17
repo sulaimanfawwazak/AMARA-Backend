@@ -79,7 +79,7 @@ function parseMataKuliah(texts) {
 }
 
 function parseTanggal(texts) {
-  const patternTanggal = /Kelas:\s*[A-Z]{1,3}\s*\d{1,3}\s*(\d{2}-\d{2}-\d{4})\s*\d{2}:\d{2}-\d{2}:\d{2}/;
+  const patternTanggal = /Kelas:\s*[A-Z]{1,6}\s*\d{1,3}\s*(\d{2}-\d{2}-\d{4})\s*\d{2}:\d{2}-\d{2}:\d{2}/;
 
   try {
     const match = texts.match(patternTanggal);
