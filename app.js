@@ -32,6 +32,7 @@ const app = express();
 app.use(cors({
   origin: [
     'https://ugmexam2gcal.vercel.app',
+    'https://ugmschedule.vercel.app/',
     'http://localhost:3000',
     'http://localhost:5173'  // For local dev
   ],
